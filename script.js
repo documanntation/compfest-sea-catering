@@ -1,6 +1,3 @@
-// script.js
-
-// Data Meal Plan (Bisa di sini atau di dalam DOMContentLoaded)
 const mealPlanData = {
   basic: {
     name: "Basic Fit Plan",
@@ -58,26 +55,22 @@ const mealPlanData = {
   },
 };
 
-// Deklarasi variabel global untuk modal dan tombol penutup (ini masih diperlukan)
 let modal;
 let closeButton;
 
-// Fungsi untuk membuka modal (PERBAIKI INI!)
 function openModal(planType) {
   const plan = mealPlanData[planType];
   if (plan) {
-    // Ambil referensi ke elemen modal dan tombol close jika belum terdeklarasi
     if (!modal) modal = document.getElementById("planDetailsModal");
     if (!closeButton) closeButton = document.querySelector(".close-button");
 
-    // Pastikan modal dan closeButton ditemukan sebelum melanjutkan
     if (!modal || !closeButton) {
-      console.error("ERROR: Modal or Close Button not found in DOM.");
-      return; // Hentikan fungsi jika elemen penting tidak ditemukan
+      console.error(
+        "ERROR: Modal or Close Button not found in DOM when trying to open."
+      );
+      return;
     }
 
-    // Ambil referensi ke elemen-elemen di dalam modal SETIAP KALI MODAL DIBUKA
-    // Ini memastikan elemen selalu terbaru dan tidak ada masalah inisialisasi
     const modalPlanName = document.getElementById("modalPlanName");
     const modalPlanImage = document.getElementById("modalPlanImage");
     const modalPlanPrice = document.getElementById("modalPlanPrice");
@@ -90,7 +83,6 @@ function openModal(planType) {
     const modalSideDish = document.getElementById("modalSideDish");
     const modalRiceType = document.getElementById("modalRiceType");
 
-    // Lakukan pengecekan tambahan jika elemen internal modal juga bisa null
     if (
       !modalPlanName ||
       !modalPlanImage ||
@@ -113,7 +105,7 @@ function openModal(planType) {
     modalPlanPrice.textContent = plan.price;
     modalPlanDescription.textContent = plan.description;
 
-    modalPlanFeatures.innerHTML = ""; // Bersihkan dulu
+    modalPlanFeatures.innerHTML = "";
     plan.features.forEach((feature) => {
       const li = document.createElement("li");
       li.textContent = feature;
@@ -125,41 +117,134 @@ function openModal(planType) {
     modalSideDish.textContent = plan.sideDishOptions;
     modalRiceType.textContent = plan.riceType;
 
-    modal.style.display = "flex"; // Tampilkan modal
-    document.body.style.overflow = "hidden"; // Nonaktifkan scroll body
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
   }
 }
 
-// Fungsi untuk menutup modal
 function closeModal() {
   if (modal) {
     modal.style.display = "none";
-    document.body.style.overflow = ""; // Aktifkan kembali scroll body
+    document.body.style.overflow = "";
   }
 }
 
-/* --- HANYA ADA SATU document.addEventListener('DOMContentLoaded') --- */
+let testimonials = [
+  {
+    name: "Sarah W.",
+    message:
+      "SEA Catering has transformed my diet! The meals are delicious and perfectly portioned. Highly recommended!",
+    rating: 5,
+  },
+  {
+    name: "Brian K.",
+    message:
+      "As a busy professional, their customizable meal plans are a lifesaver. Healthy, fresh, and always on time.",
+    rating: 4,
+  },
+  {
+    name: "Emily R.",
+    message:
+      "I love the variety and how easy it is to track my nutrition. The vegan options are fantastic!",
+    rating: 5,
+  },
+  {
+    name: "David L.",
+    message:
+      "Great service and quality food. Sometimes delivery is a bit late, but overall very satisfied.",
+    rating: 4,
+  },
+  {
+    name: "Jessica M.",
+    message:
+      "Finally, healthy food that tastes amazing! My family loves it too.",
+    rating: 5,
+  },
+];
+
+let testimonialSlider;
+let prevTestimonialBtn;
+let nextTestimonialBtn;
+let testimonialForm;
+let formMessage;
+let currentTestimonialIndex = 0;
+
+function getStarRatingHtml(rating) {
+  let starsHtml = "";
+  for (let i = 0; i < 5; i++) {
+    starsHtml += i < rating ? "&#9733;" : "&#9734;";
+  }
+  return `<div class="rating-display">${starsHtml}</div>`;
+}
+
+function renderTestimonials() {
+  if (!testimonialSlider) {
+    console.error("Testimonial slider element not initialized!");
+    return;
+  }
+  testimonialSlider.innerHTML = "";
+  testimonials.forEach((testimonial) => {
+    const testimonialCard = document.createElement("div");
+    testimonialCard.classList.add("testimonial-card");
+    testimonialCard.innerHTML = `
+            <p class="review-message">"${testimonial.message}"</p>
+            <p class="customer-name">- ${testimonial.name}</p>
+            ${getStarRatingHtml(testimonial.rating)}
+        `;
+    testimonialSlider.appendChild(testimonialCard);
+  });
+  updateSliderPosition();
+}
+
+function updateSliderPosition() {
+  if (
+    !testimonialSlider ||
+    !testimonialSlider.querySelector(".testimonial-card")
+  ) {
+    return;
+  }
+
+  const cardElement = testimonialSlider.querySelector(".testimonial-card");
+  const cardComputedStyle = window.getComputedStyle(cardElement);
+  const cardWidth = cardElement.offsetWidth;
+  const marginLeft = parseFloat(cardComputedStyle.marginLeft);
+  const marginRight = parseFloat(cardComputedStyle.marginRight);
+  const totalCardWidth = cardWidth + marginLeft + marginRight;
+
+  testimonialSlider.style.transform = `translateX(-${
+    currentTestimonialIndex * totalCardWidth
+  }px)`;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-  // Inisialisasi elemen modal dan tombol close setelah DOM siap
-  // Ini penting agar variabel 'modal' dan 'closeButton' punya nilai
   modal = document.getElementById("planDetailsModal");
   closeButton = document.querySelector(".close-button");
+  testimonialSlider = document.querySelector(".testimonial-slider");
+  prevTestimonialBtn = document.querySelector(".prev-testimonial");
+  nextTestimonialBtn = document.querySelector(".next-testimonial");
+  testimonialForm = document.getElementById("testimonialForm");
+  formMessage = document.getElementById("formMessage");
 
-  // Lakukan pengecekan awal apakah modal dan closeButton ditemukan
-  if (!modal) {
+  if (!modal)
     console.error(
-      "Initialization Error: Modal HTML element (id='planDetailsModal') not found! Check your HTML structure."
+      "Initialization Error: Modal HTML element (id='planDetailsModal') not found!"
     );
-    return; // Hentikan eksekusi jika modal tidak ditemukan
-  }
-  if (!closeButton) {
+  if (!closeButton)
     console.error(
       "Initialization Error: Modal close button (.close-button) not found!"
     );
-    // Jangan return, karena modal masih bisa ditutup dengan klik di luar
-  }
-
-  // --- Event Listeners untuk semua tombol/link (semuanya di sini) ---
+  if (!testimonialSlider)
+    console.error(
+      "Initialization Error: Testimonial slider element (.testimonial-slider) not found!"
+    );
+  if (!testimonialForm)
+    console.error(
+      "Initialization Error: Testimonial form element (id='testimonialForm') not found!"
+    );
+  if (!formMessage)
+    console.error(
+      "Initialization Error: Form message element (id='formMessage') not found!"
+    );
 
   // Navbar & Hero Section Buttons
   const btnSignUp = document.getElementById("btnSignUp");
@@ -193,7 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Feature Items (Mouse Enter/Leave)
+  // Feature Items
   const featureItems = document.querySelectorAll(".feature-item");
   featureItems.forEach((item) => {
     item.addEventListener("mouseenter", function () {
@@ -208,7 +293,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Logika Highlight Halaman Aktif di Navbar
   const navLinks = document.querySelectorAll(".nav-links a");
   const currentPath = window.location.pathname;
 
@@ -243,7 +327,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // --- Logika Modal "See More Details" ---
   const seeMoreButtons = document.querySelectorAll(".see-more-btn");
   seeMoreButtons.forEach((button) => {
     button.addEventListener("click", function () {
@@ -252,19 +335,72 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Event listener untuk tombol silang di modal
   if (closeButton) {
-    // Pastikan closeButton ada sebelum menambahkan listener
     closeButton.addEventListener("click", closeModal);
   }
 
-  // Menutup modal jika area gelap di luar modal diklik
   if (modal) {
-    // Pastikan modal ada sebelum menambahkan listener
     window.addEventListener("click", function (event) {
       if (event.target == modal) {
         closeModal();
       }
     });
   }
-}); // <--- PENUTUP UNTUK SATU-SATUNYA DOMContentLoaded
+
+  // --- Event Listener untuk tombol Testimonial Slider ---
+  if (nextTestimonialBtn) {
+    nextTestimonialBtn.addEventListener("click", () => {
+      currentTestimonialIndex =
+        (currentTestimonialIndex + 1) % testimonials.length;
+      updateSliderPosition();
+    });
+  }
+
+  if (prevTestimonialBtn) {
+    prevTestimonialBtn.addEventListener("click", () => {
+      currentTestimonialIndex =
+        (currentTestimonialIndex - 1 + testimonials.length) %
+        testimonials.length;
+      updateSliderPosition();
+    });
+  }
+
+  if (testimonialForm) {
+    testimonialForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("customerName").value.trim();
+      const message = document.getElementById("reviewMessage").value.trim();
+      const ratingInput = document.querySelector(
+        'input[name="rating"]:checked'
+      );
+
+      if (!name || !message || !ratingInput) {
+        formMessage.textContent =
+          "Please fill in all fields and provide a rating.";
+        formMessage.style.color = "red";
+        return;
+      }
+
+      const newTestimonial = {
+        name: name,
+        message: message,
+        rating: parseInt(ratingInput.value),
+      };
+
+      testimonials.push(newTestimonial);
+      renderTestimonials();
+      testimonialForm.reset();
+      formMessage.textContent =
+        "Thank you for your review! It has been submitted.";
+      formMessage.style.color = "green";
+
+      currentTestimonialIndex = testimonials.length - 1;
+      updateSliderPosition();
+    });
+  }
+
+  renderTestimonials();
+
+  window.addEventListener("resize", updateSliderPosition);
+});

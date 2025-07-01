@@ -111,7 +111,7 @@
         </div>
       </section>
 
-      <section id="meal-plans-page" class="content-section">
+      <section id="our-meal-plans-section" class="content-section">
         <h2 class="section-title">Our Delicious Meal Plans</h2>
         <p class="section-description">
           Explore our customizable healthy meal plans designed to fit your
@@ -200,6 +200,81 @@
           <button class="btn btn-primary">Choose This Plan</button>
         </div>
       </div>
+
+      <section id="testimonials-section" class="content-section">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <p class="section-description">
+          Hear directly from those who love SEA Catering!
+        </p>
+
+        <!-- Form untuk Mengirim Testimonial Baru -->
+        <div class="testimonial-form-container">
+          <h3>Share Your Experience!</h3>
+          <form id="testimonialForm" class="testimonial-form">
+            <div class="form-group">
+              <label for="customerName">Your Name:</label>
+              <input
+                type="text"
+                id="customerName"
+                name="customerName"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="reviewMessage">Your Review:</label>
+              <textarea
+                id="reviewMessage"
+                name="reviewMessage"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label>Rating:</label>
+              <div class="rating-stars">
+                <input
+                  type="radio"
+                  id="star5"
+                  name="rating"
+                  value="5"
+                  required
+                /><label for="star5" title="5 stars">&#9733;</label>
+                <input type="radio" id="star4" name="rating" value="4" /><label
+                  for="star4"
+                  title="4 stars"
+                  >&#9733;</label
+                >
+                <input type="radio" id="star3" name="rating" value="3" /><label
+                  for="star3"
+                  title="3 stars"
+                  >&#9733;</label
+                >
+                <input type="radio" id="star2" name="rating" value="2" /><label
+                  for="star2"
+                  title="2 stars"
+                  >&#9733;</label
+                >
+                <input type="radio" id="star1" name="rating" value="1" /><label
+                  for="star1"
+                  title="1 star"
+                  >&#9733;</label
+                >
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+            <p id="formMessage" class="form-message"></p>
+          </form>
+        </div>
+
+        <!-- Testimonial Slider/Carousel -->
+        <div class="testimonial-slider-container">
+          <button class="slider-arrow prev-testimonial">&#8249;</button>
+          <div class="testimonial-slider">
+            <!-- Testimonial cards will be inserted here by JavaScript -->
+          </div>
+          <button class="slider-arrow next-testimonial">&#8250;</button>
+        </div>
+      </section>
     </main>
 
     <script src="script.js"></script>
