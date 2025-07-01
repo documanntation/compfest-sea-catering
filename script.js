@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (navContactUs) {
     navContactUs.addEventListener("click", function (event) {
       event.preventDefault();
-      alert("Anda mengklik link Contact Us di Navbar!");
+      alert("Manager: Brian,Phone Number: 08123456789");
     });
   }
 
