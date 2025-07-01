@@ -283,6 +283,205 @@ a {
   color: var(--text-color-light);
 }
 
+.section-description {
+  font-size: 1.1rem;
+  color: var(--text-color-muted);
+  max-width: 900px;
+  margin: 20px auto 50px auto;
+}
+
+.meal-plan-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Responsif Grid */
+  gap: var(--spacing-xl); /* Jarak antar kartu */
+  margin-top: var(--spacing-xxl);
+}
+
+.meal-plan-card {
+  background-color: var(--bg-light);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px var(--box-shadow-medium);
+  overflow: hidden; /* Pastikan gambar tidak keluar dari border-radius */
+  text-align: center;
+  padding-bottom: var(--spacing-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.meal-plan-card:hover {
+  transform: translateY(-8px); /* Efek angkat saat hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.meal-plan-card .plan-image {
+  width: 100%;
+  height: 200px; /* Tinggi tetap untuk gambar */
+  object-fit: cover; /* Pastikan gambar mengisi area tanpa terdistorsi */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-bottom: var(--spacing-md);
+}
+
+.meal-plan-card h3 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+.meal-plan-card .price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.meal-plan-card .description {
+  font-size: 1rem;
+  color: var(--text-color-muted);
+  padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  min-height: 80px; /* Agar tinggi kartu konsisten jika deskripsi pendek */
+}
+
+.meal-plan-card .btn {
+  margin-top: auto; /* Dorong tombol ke bawah jika kartu punya tinggi flex */
+}
+
+/* --- MODAL STYLES --- */
+.modal {
+  display: none; /* Sembunyikan secara default */
+  position: fixed; /* Tetap di posisi yang sama meskipun scroll */
+  z-index: 200; /* Di atas segalanya */
+  left: 0;
+  top: 0;
+  width: 100%; /* Lebar penuh */
+  height: 100%; /* Tinggi penuh */
+  overflow: auto; /* Memungkinkan scroll jika konten terlalu panjang */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.6
+  ); /* Latar belakang semi-transparan gelap */
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-out; /* Animasi muncul */
+}
+
+.modal-content {
+  background-color: var(--bg-light);
+  margin: auto;
+  padding: var(--spacing-xl);
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+  width: 90%; /* Lebar modal */
+  max-width: 700px; /* Lebar maksimal */
+  position: relative;
+  animation: slideIn 0.3s ease-out; /* Animasi muncul dari atas */
+}
+
+.modal-content .close-button {
+  color: #aaa;
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-md);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.modal-content .close-button:hover,
+.modal-content .close-button:focus {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.modal-content h3 {
+  font-size: 2.2rem;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.modal-content #modalPlanImage {
+  max-width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: var(--spacing-md);
+}
+
+.modal-content #modalPlanPrice {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.modal-content #modalPlanDescription {
+  font-size: 1.1rem;
+  color: var(--text-color-muted);
+  margin-bottom: var(--spacing-lg);
+}
+
+.modal-content .additional-info h4 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  text-align: left;
+}
+
+.modal-content .additional-info ul {
+  list-style-type: disc;
+  padding-left: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+  text-align: left;
+}
+
+.modal-content .additional-info li {
+  font-size: 1rem;
+  color: var(--text-color-dark);
+  margin-bottom: 5px;
+}
+
+.modal-content .btn {
+  margin-top: var(--spacing-xl);
+  width: auto; /* Otomatis lebar tombol */
+  padding: var(--spacing-md) var(--spacing-xxl); /* Lebih besar */
+}
+
+.modal-content #modalPlanDescription {
+  font-size: 1.1rem;
+  color: var(--text-color-muted);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* --- NEW: Meal Specific Details inside Modal --- */
+.modal-content .meal-details {
+  background-color: #f0f0f0; /* Latar belakang abu-abu muda */
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  margin-bottom: var(--spacing-lg);
+  text-align: left;
+}
+
+.modal-content .meal-details p {
+  font-size: 1rem;
+  color: var(--text-color-dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.modal-content .meal-details p:last-child {
+  margin-bottom: 0; /* Hapus margin bawah pada paragraf terakhir */
+}
+
+.modal-content .meal-details strong {
+  color: var(--primary-color); /* Warna primary untuk label */
+}
+
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 992px) {
   .navbar {
@@ -364,5 +563,74 @@ a {
   .dish-2,
   .dish-3 {
     display: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --- RESPONSIVE DESIGN (Tambahan untuk Modal dan Grid) --- */
+@media (max-width: 768px) {
+  .meal-plan-grid {
+    grid-template-columns: 1fr; /* Satu kolom di layar mobile */
+    gap: var(--spacing-lg);
+  }
+
+  .modal-content {
+    width: 95%; /* Lebih lebar di mobile */
+    padding: var(--spacing-md);
+  }
+
+  .modal-content h3 {
+    font-size: 1.8rem;
+  }
+
+  .modal-content #modalPlanImage {
+    height: 200px;
+  }
+
+  .modal-content #modalPlanPrice {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .meal-plan-card {
+    padding-bottom: var(--spacing-sm);
+  }
+
+  .meal-plan-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .meal-plan-card .price {
+    font-size: 1.2rem;
+  }
+
+  .modal-content h3 {
+    font-size: 1.5rem;
+  }
+  .modal-content .close-button {
+    font-size: 2rem;
+  }
+  .modal-content .additional-info h4 {
+    font-size: 1.1rem;
   }
 }

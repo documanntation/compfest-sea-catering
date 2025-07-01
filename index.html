@@ -110,6 +110,96 @@
           </div>
         </div>
       </section>
+
+      <section id="meal-plans-page" class="content-section">
+        <h2 class="section-title">Our Delicious Meal Plans</h2>
+        <p class="section-description">
+          Explore our customizable healthy meal plans designed to fit your
+          lifestyle.
+        </p>
+
+        <div class="meal-plan-grid">
+          <div class="meal-plan-card">
+            <img
+              src="./assets/dish-1.jpg"
+              alt="Basic Meal Plan"
+              class="plan-image"
+            />
+            <h3>Basic Fit Plan</h3>
+            <p class="price">IDR 500.000 / week</p>
+            <p class="description">
+              Perfect for a balanced diet with essential nutrients. Includes 10
+              meals per week.
+            </p>
+            <button class="btn btn-primary see-more-btn" data-plan="basic">
+              See More Details
+            </button>
+          </div>
+
+          <div class="meal-plan-card">
+            <img
+              src="./assets/dish-2.jpg"
+              alt="Ultimatasty"
+              class="plan-image"
+            />
+            <h3>The Ultimatasty</h3>
+            <p class="price">IDR 750.000 / week</p>
+            <p class="description">
+              High-fat, low-carb meals designed for people who want to enjoy a
+              usual diet. Includes 12 meals per week.
+            </p>
+            <button
+              class="btn btn-primary see-more-btn"
+              data-plan="ultimatasty"
+            >
+              See More Details
+            </button>
+          </div>
+
+          <div class="meal-plan-card">
+            <img
+              src="./assets/dish-3.jpg"
+              alt="Vegan Meal Plan"
+              class="plan-image"
+            />
+            <h3>Vegan Delight Plan</h3>
+            <p class="price">IDR 600.000 / week</p>
+            <p class="description">
+              Wholesome plant-based meals, rich in flavor and nutrition.
+              Includes 10 meals per week.
+            </p>
+            <button class="btn btn-primary see-more-btn" data-plan="vegan">
+              See More Details
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div id="planDetailsModal" class="modal">
+        <div class="modal-content">
+          <span class="close-button">&times;</span>
+          <h3 id="modalPlanName"></h3>
+          <img id="modalPlanImage" src="" alt="Meal Plan Image" />
+          <p id="modalPlanPrice"></p>
+          <p id="modalPlanDescription"></p>
+
+          <div class="meal-details">
+            <p><strong>Calories:</strong> <span id="modalCalories"></span></p>
+            <p>
+              <strong>Side Dish Options:</strong>
+              <span id="modalSideDish"></span>
+            </p>
+            <p><strong>Rice Type:</strong> <span id="modalRiceType"></span></p>
+          </div>
+          <div class="additional-info">
+            <h4>What's Included:</h4>
+            <ul id="modalPlanFeatures"></ul>
+            <h4>Typical Meals:</h4>
+            <p id="modalTypicalMeals"></p>
+          </div>
+          <button class="btn btn-primary">Choose This Plan</button>
+        </div>
+      </div>
     </main>
 
     <script src="script.js"></script>
