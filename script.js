@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnSignUp = document.getElementById("btnSignUp");
   if (btnSignUp) {
     btnSignUp.addEventListener("click", function () {
-      alert("Anda mengklik tombol Sign up!");
+      alert("Fitur belum selesai.");
     });
   }
 
@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnCafeMenu = document.getElementById("btnCafeMenu");
   if (btnCafeMenu) {
     btnCafeMenu.addEventListener("click", function () {
-      alert("Tombol Our Special Menu diklik!");
+      alert("Special Menu masih dalam proses.");
     });
   }
 
